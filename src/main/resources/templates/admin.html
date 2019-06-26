@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <title>PAS big Data mock Service</title>
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
+    <script
+            src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script
+            src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
+.rcorners3 {
+	border-radius: 25px;
+	background: #cccccc;
+	padding: 10px;
+	margin-left: 20px;
+	width: 800px;
+	height: 300px;
+	float: left;
+}
+.sw{
+	width:200px;
+	background-color:#f5f5f5;
+	float:left;
+}
+
+.chkBox{
+	width: 30px;
+    height: 20px;
+}
+.btn-success {
+	margin-top: 10px;
+	text-align: center;
+}
+</style>
+    <script>
+	$(function() {
+		$("#txtInput").val($("#dvText").val());
+		$(".widget input[type=submit], .widget a, .widget button").button();
+		$("#btnSave").click(function(event) {
+			var inputData=$("#txtInput").val();
+			if(""==inputData){
+				alert("not valid input");
+				return;
+			}
+			$.ajax({
+				url : '/submit',
+				data : {
+					'key' : $('#dataType').val(),
+					'input' : $("#txtInput").val()
+				},
+				success : function(result) {
+					console.log("Saved!!");
+					location.reload();
+				}
+			});
+		});
+	});
+</script>
+</head>
+<body>
+<div class="container">
+    <h2>Admin</h2>
+    <div class="panel-group" id="accordion">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#setGame">Set Game</a>
+                </h4>
+            </div>
+            <div id="collapse1" class="panel-collapse collapse in">
+                <div class="panel-body">
+                    <input type="text" placeholder="Date" id="txtDate"></input>
+                    Team1
+                    <select>
+                        <option>test</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#SeeResult">See Result</a>
+                </h4>
+            </div>
+            <div id="collapse2" class="panel-collapse collapse">
+                <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+                    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#Other">Others</a>
+                </h4>
+            </div>
+            <div id="collapse3" class="panel-collapse collapse">
+                <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+                    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
