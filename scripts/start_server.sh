@@ -1,2 +1,2 @@
 echo "inside start server"
-java -jar /var/myapp/game-0.1.0.jar &
+nohup java -jar /var/myapp/game-0.1.0.jar >/var/log/game.log 2>&1 &
