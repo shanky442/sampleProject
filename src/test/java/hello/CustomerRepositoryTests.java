@@ -30,7 +30,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest
+//@SpringBootTest
 public class CustomerRepositoryTests {
 
     @Autowired
@@ -38,7 +38,7 @@ public class CustomerRepositoryTests {
 
     Customer dave, oliver, carter;
 
-    @Before
+    //@Before
     public void setUp() {
 
         repository.deleteAll();
@@ -48,7 +48,7 @@ public class CustomerRepositoryTests {
         carter = repository.save(new Customer("Carter", "Beauford"));
     }
 
-    @Test
+    //@Test
     public void setsIdOnSave() {
 
         Customer dave = repository.save(new Customer("Dave", "Matthews"));
@@ -56,7 +56,7 @@ public class CustomerRepositoryTests {
         assertThat(dave.id).isNotNull();
     }
 
-    @Test
+    //@Test
     public void findsByLastName() {
 
         List<Customer> result = repository.findByLastName("Beauford");
@@ -64,7 +64,7 @@ public class CustomerRepositoryTests {
         assertThat(result).hasSize(1).extracting("firstName").contains("Carter");
     }
 
-    @Test
+    //@Test
     public void findsByExample() {
 
         Customer probe = new Customer(null, "Matthews");

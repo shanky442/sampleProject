@@ -1,6 +1,9 @@
 package shl.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -8,18 +11,30 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import shl.models.FileDetails;
+import shl.models.FileDetailsResponse;
 import shl.models.User;
 import shl.services.CustomUserDetailsService;
+import shl.services.FileUploadService;
 
 import javax.validation.Valid;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 
 @RestController
 public class HomeController{
 
+
     @Autowired
     private CustomUserDetailsService userService;
+
+    @Autowired
+    private FileUploadService fileUploadService;
 
     /*@RequestMapping("/home")
     public ModelAndView home() {
@@ -103,5 +118,16 @@ public class HomeController{
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("home");
         return modelAndView;
+    }
+
+    /**
+     * endpoint for uploading a file
+     * @param file
+     * @return file id, filename and status of upload
+     */
+    @RequestMapping(value="/fileUpload", method = RequestMethod.POST)
+    public ResponseEntity<FileDetailsResponse> fileUpload(@RequestParam("file") MultipartFile file) {
+        FileDetailsResponse fd = fileUploadService.uploadFile(file);
+        return new ResponseEntity<FileDetailsResponse>(fd, HttpStatus.OK);
     }
 }

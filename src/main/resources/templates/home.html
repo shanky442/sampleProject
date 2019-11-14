@@ -2,13 +2,40 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
 	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{default}">
 <head>
-	<title>Spring Security Example</title>
+	<title>Spring Boot Example</title>
+
 </head>
 <body>
 <div layout:fragment="content">
-	<h1>Welcome!</h1>
+	<!--<h1>Welcome! sir</h1>
 
-	<p>Click <a th:href="@{/hello}">here</a> to see a greeting.</p>
+	<p>Click <a th:href="@{/hello}">here</a> to see a greeting.</p>-->
+	<!--<label for="avatar">Choose a profile picture:</label>
+
+	<input type="file"
+		   id="avatar" name="avatar"
+		   accept="image/png, image/jpeg,.pdf">-->
+
+	<form method="post" enctype="multipart/form-data" th:action="@{/fileUpload}">
+		<div>
+			<label for="file">Choose file to upload</label>
+			<input type="file" id="file" name="file" accept="image/jpeg,.pdf">
+		</div>
+		<div>
+			<button>Submit</button>
+		</div>
+	</form>
 </div>
+<script th:inline="javascript">
+		var uploadField = document.getElementById("file");
+	console.log("executed on load");
+	uploadField.onchange = function() {
+	console.log("executed on change");
+    if(this.files[0].size > 20){
+       alert("File is too big!");
+       this.value = "";
+    };
+};
+	</script>
 </body>
 </html>
