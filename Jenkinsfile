@@ -1,3 +1,9 @@
 pipeline {
-  echo 'hello world success'
+  stages {
+    stage ('step 1') {
+      steps {
+        echo 'hello world success'
+      }
+    }    
+  }  
 }
